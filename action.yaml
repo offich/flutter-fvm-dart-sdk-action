@@ -34,3 +34,4 @@ runs:
       run: |
         echo $(dart --version)
         echo "DART_VERSION=$(dart --version | cut -d ' ' -f 4)" >> $GITHUB_ENV
+      shell: bash
