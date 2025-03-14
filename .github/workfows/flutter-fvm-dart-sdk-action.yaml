@@ -2,11 +2,6 @@ name: flutter-fvm-dart-sdk-action
 
 on:
   workflow_dispatch:
-    inputs:
-      fvmrc-path:
-        description: "Path to .fvmrc file."
-        required: false
-        default: '.fvmrc'
 
 jobs:
   debug:
@@ -21,7 +16,7 @@ jobs:
         uses: ./
         id: flutter-fvm-dart-sdk-version
         with:
-          fvmrc-path: ${{ inputs.fvmrc-path }}
+          fvmrc-path: ./.github/config/.fvmrc
 
       - name: Echo Dart SDK Version
         run: echo ${{ steps.flutter-fvm-dart-sdk-version.outputs.get-dart-version }}
