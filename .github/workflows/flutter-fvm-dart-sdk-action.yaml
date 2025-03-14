@@ -19,4 +19,4 @@ jobs:
           fvmrc-path: ./.github/config/.fvmrc
 
       - name: Echo Dart SDK Version
-        run: echo ${{ steps.flutter-fvm-dart-sdk-version.outputs.get-dart-version }}
+        run: echo ${{ steps.flutter-fvm-dart-sdk-version.outputs.dart-version }}
