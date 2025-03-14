@@ -32,6 +32,5 @@ runs:
     - name: Get Dart SDK version
       id: get-dart-version
       run: |
-        echo $(dart --version)
         echo "DART_VERSION=$(dart --version | cut -d ' ' -f 4)" >> $GITHUB_OUTPUT
       shell: bash
