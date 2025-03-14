@@ -1,0 +1,36 @@
+name: 'flutter-fvm-dart-sdk-action'
+
+description: 'Extract Dart SDK version from Flutter version specified in .fvmrc'
+
+inputs:
+  fvmrc-path:
+    description: 'Path to .fvmrc file'
+    required: false
+    default: '.fvmrc'
+
+outputs:
+  dart-version:
+    description: 'Extracted Dart SDK version'
+    value: ${{ steps.get-dart-version.outputs.DART_VERSION }}
+
+runs:
+  using: 'composite'
+
+  steps:
+    - name: Run Fvm Config Action
+      uses: kuhnroyal/flutter-fvm-config-action@v3.1
+      id: fvm-config-action
+      with:
+        path: ${{ inputs.fvmrc-path }}
+
+    - name: Install Flutter
+      uses: subosito/flutter-action@v2.18.0
+      with:
+        channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
+        flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+
+    - name: Get Dart SDK version
+      id: get-dart-version
+      run: |
+        echo $(dart --version)
+        echo "DART_VERSION=$(dart --version | cut -d ' ' -f 4)" >> $GITHUB_ENV

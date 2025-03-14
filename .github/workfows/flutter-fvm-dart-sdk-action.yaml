@@ -1,0 +1,27 @@
+name: flutter-fvm-dart-sdk-action
+
+on:
+  workflow_dispatch:
+    inputs:
+      fvmrc-path:
+        description: "Path to .fvmrc file."
+        required: false
+        default: '.fvmrc'
+
+jobs:
+  debug:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.7
+
+      - name: Run Action
+        uses: ./
+        id: flutter-fvm-dart-sdk-version
+        with:
+          fvmrc-path: ${{ inputs.fvmrc-path }}
+
+      - name: Echo Dart SDK Version
+        run: echo ${{ steps.flutter-fvm-dart-sdk-version.outputs.get-dart-version }}
