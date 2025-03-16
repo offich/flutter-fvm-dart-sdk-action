@@ -2,6 +2,10 @@ name: 'flutter-fvm-dart-sdk-action'
 
 description: 'Extract Dart SDK version from Flutter version specified in .fvmrc'
 
+branding:
+  icon: 'maximize'
+  color: 'blue'
+
 inputs:
   fvmrc-path:
     description: 'Path to .fvmrc file'
